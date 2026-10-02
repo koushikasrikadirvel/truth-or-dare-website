@@ -1,0 +1,59 @@
+:root{--ink:#2b0a3d;--card:#fffbe8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;padding:24px 16px 48px;text-align:center;font-family:"Trebuchet MS",system-ui,sans-serif;font-weight:700;color:var(--ink);
+background:linear-gradient(120deg,#ff3d8b,#ff9f1c,#ffe14d,#3ddc97,#29b6ff,#8f5bff,#ff3d8b);background-size:400% 400%;animation:bg 14s ease infinite}
+@keyframes bg{50%{background-position:100% 50%}}
+@media(prefers-reduced-motion:reduce){body{animation:none}}
+h1,h2{font-family:"Arial Black",Impact,sans-serif;margin:8px 0 4px;line-height:1.05}
+h1{font-size:clamp(2.2rem,8vw,4.2rem);color:#fff;text-shadow:4px 4px 0 var(--ink)}
+h2{font-size:1.9rem;color:#fff;text-shadow:3px 3px 0 var(--ink)}
+.sub{max-width:34rem;margin:0 auto;font-size:1.1rem}
+section{padding-top:28px}
+
+/* wheel */
+.toggle{position:absolute;opacity:0}
+.stage{position:relative;width:min(86vw,380px);margin:18px auto 0}
+.pointer{position:absolute;top:-16px;left:50%;transform:translateX(-50%);z-index:3;border:20px solid transparent;border-top:42px solid var(--ink);border-bottom:0}
+.wheel{position:relative;aspect-ratio:1;border-radius:50%;border:8px solid var(--ink);box-shadow:0 10px 0 var(--ink)}
+.wheel::after{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(from calc(var(--step) / -2 - 1deg),var(--ink) 0 2deg,transparent 2deg var(--step))}
+.wheel span{position:absolute;left:50%;top:50%;width:46%;padding-right:12px;z-index:1;text-align:right;line-height:1.1;font-size:15px;font-weight:800;
+transform-origin:0 0;transform:rotate(calc(var(--i) * var(--step) - 90deg)) translateY(-50%)}
+.hub{position:absolute;top:50%;left:50%;width:64px;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:var(--card);border:6px solid var(--ink);display:grid;place-items:center;font-size:1.5rem;z-index:2}
+
+/* wheel colours */
+.w-main{--step:60deg;background:conic-gradient(from -30deg,#ff3d8b 0 60deg,#29b6ff 60deg 120deg,#ffe14d 120deg 180deg,#3ddc97 180deg 240deg,#8f5bff 240deg 300deg,#ff9f1c 300deg 360deg)}
+.w-main span{font-size:22px}
+.w-truth{--step:60deg;background:conic-gradient(from -30deg,#ff3d8b 0 60deg,#ffe14d 60deg 120deg,#29b6ff 120deg 180deg,#3ddc97 180deg 240deg,#8f5bff 240deg 300deg,#ff9f1c 300deg 360deg)}
+.w-dare{--step:36deg;background:conic-gradient(from -18deg,#ff3d8b 0 36deg,#ff9f1c 36deg 72deg,#ffe14d 72deg 108deg,#3ddc97 108deg 144deg,#29b6ff 144deg 180deg,#8f5bff 180deg 216deg,#ff7ad9 216deg 252deg,#b8e000 252deg 288deg,#00c2a8 288deg 324deg,#ff6b6b 324deg 360deg)}
+
+/* buttons */
+.btn{display:inline-block;margin-top:26px;padding:14px 38px;border-radius:999px;background:var(--ink);color:#fff;font-size:1.3rem;text-decoration:none;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,.35)}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.35)}
+label.btn::after{content:"Spin the wheel"}
+.toggle:checked ~ label.btn::after{content:"Reset, then spin again"}
+.toggle:focus-visible ~ .btn,.btn:focus-visible{outline:4px solid #fff;outline-offset:3px}
+.btn.alt{margin:26px 6px 0;padding:12px 24px;font-size:1.1rem}
+
+/* auto-stop spin: a hidden fast counter (--k) freezes the moment you press Spin,
+   the wheel then lands on slice --k by itself and only that result is shown */
+@property --k{syntax:"<number>";inherits:true;initial-value:0}
+@keyframes tick6{to{--k:6}}
+@keyframes tick10{to{--k:10}}
+.game{--t:1.3s}
+.g6{animation:tick6 var(--t) steps(6,end) infinite}
+.g10{animation:tick10 var(--t) steps(10,end) infinite}
+.game:has(.toggle:checked),.game:has(.toggle:checked) .result p{animation-play-state:paused}
+@keyframes land{to{transform:rotate(calc(1440deg - var(--k) * var(--step)))}}
+.toggle:checked ~ .stage .wheel{animation:land 4s cubic-bezier(.15,.6,.1,1) forwards}
+@keyframes vis6{0%,16.666%{visibility:visible}16.667%,100%{visibility:hidden}}
+@keyframes vis10{0%,9.999%{visibility:visible}10%,100%{visibility:hidden}}
+.result{position:relative;max-width:34rem;min-height:150px;margin:28px auto 0;background:var(--card);border:5px solid var(--ink);border-radius:24px;box-shadow:0 8px 0 var(--ink);opacity:0}
+.result p{position:absolute;inset:0;margin:0;padding:16px 22px;display:grid;place-content:center;gap:6px;font-size:1.3rem;visibility:hidden;
+animation-duration:var(--t);animation-timing-function:linear;animation-iteration-count:infinite;animation-delay:calc((var(--i) / var(--n) - 1) * var(--t))}
+.g6 .result p{animation-name:vis6}
+.g10 .result p{animation-name:vis10}
+.result b{font-family:"Arial Black",Impact,sans-serif;font-size:1.8rem}
+.result a{color:var(--ink)}
+@keyframes reveal{from{opacity:0}to{opacity:1}}
+.toggle:checked ~ .result{animation:reveal .4s 4.1s both}

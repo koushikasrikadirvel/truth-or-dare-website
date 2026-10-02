@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Truth or Dare Wheel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Truth or Dare Wheel</h1>
+<p class="sub">Press Spin. The wheel stops by itself and shows one result.</p>
+
+<section id="main" class="game g6" style="--n:6">
+  <h2 style="margin-bottom:0">Spin to start</h2>
+  <input class="toggle" type="checkbox" id="spin-main" aria-label="Spin the main wheel">
+  <div class="stage"><div class="pointer"></div><div class="wheel w-main"><span style="--i:0">TRUTH</span><span style="--i:1">DARE</span><span style="--i:2">TRUTH</span><span style="--i:3">DARE</span><span style="--i:4">TRUTH</span><span style="--i:5">DARE</span></div><div class="hub">?</div></div>
+  <label class="btn" for="spin-main"></label>
+  <div class="result" aria-live="polite"><p style="--i:0"><b>Truth!</b><a href="#truth">Spin the truth wheel</a></p><p style="--i:1"><b>Dare!</b><a href="#dare">Spin the dare wheel</a></p><p style="--i:2"><b>Truth!</b><a href="#truth">Spin the truth wheel</a></p><p style="--i:3"><b>Dare!</b><a href="#dare">Spin the dare wheel</a></p><p style="--i:4"><b>Truth!</b><a href="#truth">Spin the truth wheel</a></p><p style="--i:5"><b>Dare!</b><a href="#dare">Spin the dare wheel</a></p></div>
+</section>
+<section id="truth" class="game g6" style="--n:6">
+  <h2>Truth wheel</h2>
+  <input class="toggle" type="checkbox" id="spin-truth" aria-label="Spin the truth wheel">
+  <div class="stage"><div class="pointer"></div><div class="wheel w-truth"><span style="--i:0">Crush</span><span style="--i:1">Fear</span><span style="--i:2">Secret</span><span style="--i:3">Lie</span><span style="--i:4">Dream</span><span style="--i:5">Cringe</span></div><div class="hub">?</div></div>
+  <label class="btn" for="spin-truth"></label>
+  <div class="result" aria-live="polite"><p style="--i:0"><b>Truth</b>Who was your first crush?</p><p style="--i:1"><b>Truth</b>What is your biggest fear?</p><p style="--i:2"><b>Truth</b>What is a talent nobody knows you have?</p><p style="--i:3"><b>Truth</b>What was the last lie you told?</p><p style="--i:4"><b>Truth</b>What is the weirdest dream you remember?</p><p style="--i:5"><b>Truth</b>What is the most embarrassing thing you have done in public?</p></div>
+</section>
+<section id="dare" class="game g10" style="--n:10">
+  <h2>Dare wheel</h2>
+  <input class="toggle" type="checkbox" id="spin-dare" aria-label="Spin the dare wheel">
+  <div class="stage"><div class="pointer"></div><div class="wheel w-dare"><span style="--i:0">Dance</span><span style="--i:1">Stranger</span><span style="--i:2">Pushups</span><span style="--i:3">Mimicry</span><span style="--i:4">Chicken</span><span style="--i:5">Robot</span><span style="--i:6">Sing</span><span style="--i:7">Spoon</span><span style="--i:8">Alphabet</span><span style="--i:9">Monkey</span></div><div class="hub">!</div></div>
+  <label class="btn" for="spin-dare"></label>
+  <div class="result" aria-live="polite"><p style="--i:0"><b>Dance</b>Dance your best moves for 20 seconds.</p><p style="--i:1"><b>Stranger</b>Go meet a stranger and say, "You are beautiful today."</p><p style="--i:2"><b>Pushups</b>Do 5 pushups.</p><p style="--i:3"><b>Mimicry</b>Do a mimicry of a person, animal or celebrity.</p><p style="--i:4"><b>Chicken</b>Do the chicken dance for 20 seconds.</p><p style="--i:5"><b>Robot</b>Talk in a robot voice for the next 3 turns.</p><p style="--i:6"><b>Sing</b>Sing the chorus of any song, loudly.</p><p style="--i:7"><b>Spoon</b>Balance a spoon on your nose for 10 seconds.</p><p style="--i:8"><b>Alphabet</b>Do 15 jumping jacks while saying the alphabet.</p><p style="--i:9"><b>Monkey</b>Act like a monkey until your next turn.</p></div>
+</section>
+<p><a class="btn alt" href="#main">Back to the main wheel</a></p>
+</body>
+</html>
